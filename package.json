@@ -1,30 +1,30 @@
 {
-  "name": "TainanBusMap",
+  "name": "BusRouteMap",
   "version": "1.0.0",
-  "description": "Tainan Bus View Page",
-  "main": "TainanBus.js",
+  "description": "Bus Route View Page",
+  "main": "Bus.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kagami3421/TainanBusMap"
+    "url": "https://github.com/OsmHackTW/BusRouteMap"
   },
   "keywords": [
-    "tainan"
+    "bus",
+    "OpenStreetMap"
   ],
   "author": "Kagami",
   "license": "GPLv2",
   "bugs": {
-    "url": "https://github.com/kagami3421/TainanBusMap/issues"
+    "url": "https://github.com/OsmHackTW/BusRouteMap/issues"
   },
-  "homepage": "https://kagami3421.github.io/TainanBusMap/",
+  "homepage": "http://osmhacktw.github.io/BusRouteMap",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-processhtml": "^0.3.3",
     "grunt-string-replace": "^1.0.0"
-  },
-  "license": "GPL-2.0"
+  }
 }
