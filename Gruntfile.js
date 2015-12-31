@@ -10,9 +10,9 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'build/CommonVariable.min.js': ['src/CommonVariable.js'],
-                    'build/TainanBus.min.js': ['src/TainanBus.js'],
-                    'build/TainanBusDiv.min.js': ['src/TainanBusDiv.js'],
-                    'build/TainanBusRender.min.js': ['src/TainanBusRender.js']
+                    'build/BusMainPage.min.js': ['src/BusMainPage.js'],
+                    'build/BusDivPage.min.js': ['src/BusDivPage.js'],
+                    'build/BusRender.min.js': ['src/BusRender.js']
                 }
             }
         },
@@ -22,8 +22,8 @@ module.exports = function(grunt) {
             },
             add_banner: {
                 files: {
-                    'build/Tbus.min.css': ['src/TBus.css'],
-                    'build/TDivbus.min.css': ['src/TDivBus.css']
+                    'build/BusMain.min.css': ['src/BusMain.css'],
+                    'build/BusDiv.min.css': ['src/BusDiv.css']
                 }
             }
         }

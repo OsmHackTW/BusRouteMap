@@ -1,10 +1,10 @@
-TainanBusMap
+BusRouteMap
 ============
 
-View Bus Routes of Tainan City
+Generic Bus Routes view for every city
 
 # Direct Link:
-http://kagami3421.github.io/TainanBusMap
+http://osmhacktw.github.io/BusRouteMap/
 
 # Features:
 
@@ -26,13 +26,8 @@ http://kagami3421.github.io/TainanBusMap
 # Data Reference:
 
 * OpenStreetMap
-* [Tainan Bus Dynamic System](http://tourguide.tainan.gov.tw/newtnbusweb/)
-* [Tainan Open Data](http://data.tainan.gov.tw/)
-* [Tainan Bus Fan Website](http://nottainanbus.wix.com/tainancitybus)
-* Shing-nan Bus Corporation
-* Xin-yin Bus Corporation
-* Fu-cheng Bus Corporation
 
-# Integrated Bus Map
+# Wiki
 
-* Please check [How to use integrated map](https://github.com/kagami3421/TainanBusMap/wiki/How-to-use-integrated-bus-map) wiki page
+* [How to use integrated map](https://github.com/osmhacktw/BusRouteMap/wiki/How-to-use-integrated-bus-map) wiki page
+* Set up config file (Coming Soon...)
