@@ -56,8 +56,8 @@ function InitCategories() {
             RouteDownloadManager.InitStopIconOption(item.categoryIndex);
             //Save Color Setting
             var ColorScheme = {
-                MainLineColor: item.categoryLineColor,
-                ExtendLineColor: item.categoryLineColor2
+                MainLineColor: item.categoryMainLineColor,
+                ExtendLineColor: item.categoryExtendLineColor
             }
             ColorSchemeCollect.push(ColorScheme);
         });

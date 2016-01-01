@@ -2,55 +2,55 @@
 	{
 		"categoryIndex":1,
 		"categoryName":"市區公車",
-		"categoryLineColor":"#9900CC",
-		"categoryLineColor2":"#D699EB"
+		"categoryMainLineColor":"#9900CC",
+		"categoryExtendLineColor":"#D699EB"
 	},
 	{
 		"categoryIndex":2,
 		"categoryName":"紅幹線",
-		"categoryLineColor":"#FF3030",
-		"categoryLineColor2":"#FF6E6E"
+		"categoryMainLineColor":"#FF3030",
+		"categoryExtendLineColor":"#FF6E6E"
 	},
 	{
 		"categoryIndex":3,
 		"categoryName":"藍幹線",
-		"categoryLineColor":"#0000FF",
-		"categoryLineColor2":"#8080FF"
+		"categoryMainLineColor":"#0000FF",
+		"categoryExtendLineColor":"#8080FF"
 	},
 	{
 		"categoryIndex":4,
 		"categoryName":"綠幹線",
-		"categoryLineColor":"#006600",
-		"categoryLineColor2":"#66A366"
+		"categoryMainLineColor":"#006600",
+		"categoryExtendLineColor":"#66A366"
 	},
 	{
 		"categoryIndex":5,
 		"categoryName":"棕幹線",
-		"categoryLineColor":"#993300",
-		"categoryLineColor2":"#C28566"
+		"categoryMainLineColor":"#993300",
+		"categoryExtendLineColor":"#C28566"
 	},
 	{
 		"categoryIndex":6,
 		"categoryName":"橘幹線",
-		"categoryLineColor":"#FF3300",
-		"categoryLineColor2":"#FF704D"
+		"categoryMainLineColor":"#FF3300",
+		"categoryExtendLineColor":"#FF704D"
 	},
 	{
 		"categoryIndex":7,
 		"categoryName":"黃幹線",
-		"categoryLineColor":"#FFCC00",
-		"categoryLineColor2":"#FFE066"
+		"categoryMainLineColor":"#FFCC00",
+		"categoryExtendLineColor":"#FFE066"
 	},
 	{
 		"categoryIndex":8,
 		"categoryName":"觀光公車",
-		"categoryLineColor":"#4C4C4C",
-		"categoryLineColor2":"#949494"
+		"categoryMainLineColor":"#4C4C4C",
+		"categoryExtendLineColor":"#949494"
 	},
 	{
 		"categoryIndex":9,
 		"categoryName":"高鐵快捷公車",
-		"categoryLineColor":"#4C4C4C",
-		"categoryLineColor2":"#949494"
+		"categoryMainLineColor":"#4C4C4C",
+		"categoryExtendLineColor":"#949494"
 	}
 ]
