@@ -14,7 +14,9 @@
     <link href="css/MarkerCluster.css" rel="stylesheet" />
     <link href="css/MarkerCluster.Default.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="build/BusMain.min.css">
+    <!-- build:css:dist build/BusMain.min.css -->
+    <link href="src/BusMain.css" rel="stylesheet">
+    <!-- /build -->
 
 </head>
 
@@ -72,11 +74,17 @@
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="js/leaflet.markercluster.js"></script>
 
-    <script src="build/CommonVariable.min.js"></script>
+    <!-- build:js:dist build/CommonVariable.min.js -->
+    <script src="src/CommonVariable.js"></script>
+    <!-- /build -->
 
-    <script src="build/BusRender.min.js"></script>
+    <!-- build:js:dist build/BusRender.min.js -->
+    <script src="src/BusRender.js"></script>
+    <!-- /build -->
 
-    <script src="build/BusMainPage.min.js"></script>
+    <!-- build:js:dist build/BusMainPage.min.js -->
+    <script src="src/BusMainPage.js"></script>
+    <!-- /build -->
 </body>
 
 </html>

@@ -26,10 +26,24 @@ module.exports = function(grunt) {
                     'build/BusDiv.min.css': ['src/BusDiv.css']
                 }
             }
+        },
+        processhtml: {
+          dist: {
+            options: {
+              data: {
+                message: 'Go to production distribution'
+              }
+            },
+            files: {
+              'index.html': ['devindex.html']
+            }
+          }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.registerTask('default', ['uglify','cssmin']);
+    grunt.loadNpmTasks('grunt-processhtml');
+
+    grunt.registerTask('default', ['uglify','cssmin','processhtml']);
 };
