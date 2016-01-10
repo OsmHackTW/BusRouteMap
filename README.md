@@ -2,11 +2,12 @@ BusRouteMap
 ============
 
 
-Bus Routes view for your city !
+Build Bus Routes Map for your city !
 
 # Example (Tainan):
-http://osmhacktw.github.io/BusRouteMap/
-http://osmhacktw.github.io/BusRouteMap/DivTest.html
+
+* http://osmhacktw.github.io/BusRouteMap/
+* http://osmhacktw.github.io/BusRouteMap/DivTest.html
 
 # Features:
 
@@ -15,6 +16,15 @@ http://osmhacktw.github.io/BusRouteMap/DivTest.html
 * Query dynamic arrival time at the stop
 * Query information of current route
 * Dive Page for integration
+
+# Build Your Own Bus Map !
+## Tutorial
+* [Quick Start](https://github.com/osmhacktw/BusRouteMap/wiki/Quick-Start)
+* [Setup config and category files](https://github.com/osmhacktw/BusRouteMap/wiki/Setup-config-and-category-files)
+* [Build bus list Json files](https://github.com/osmhacktw/BusRouteMap/wiki/Build-bus-list-Json-files)
+
+## Extra
+* [How to use integrated map](https://github.com/osmhacktw/BusRouteMap/wiki/How-to-use-integrated-bus-map)
 
 # Library Reference:
 
@@ -29,9 +39,3 @@ http://osmhacktw.github.io/BusRouteMap/DivTest.html
 # Data Reference:
 
 * OpenStreetMap
-
-# Wiki
-
-* [How to use integrated map](https://github.com/osmhacktw/BusRouteMap/wiki/How-to-use-integrated-bus-map)
-* Setup config and category files (Coming Soon...)
-* Build bus list Json files (Coming Soon...)
