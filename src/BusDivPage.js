@@ -1,18 +1,18 @@
-var AllRoutesJsonUrl = "LocalData/AllBusRoutes";
-
-var RouteDownloadManager;
-
-var DivString = '#map';
-
-var DirControl;
-var InfoControl;
-var ColorSchemeCollect = [];
-var RouteElements = [];
-
-//var currentRelation;
+var DivPageVars = {
+  AllRoutesJsonUrl : "LocalData/AllBusRoutes",
+  RouteDownloadManager : undefined,
+  DivString : "#map",
+  DirControl : undefined,
+  InfoControl : undefined,
+  ColourSchemeCollect : {},
+  RouteElements: []
+}
 
 $(document).ready(function() {
-    var DivElement = $(DivString);
+
+    CommonVars.InitConfig();
+
+    var DivElement = $(DivPageVars.DivString);
 
     if (DivElement === undefined || DivElement.attr('bus-ref') === undefined) {
         window.alert("找不到地圖Div或編號不存在!");
@@ -24,41 +24,40 @@ $(document).ready(function() {
 
 function CreateBusMap(id) {
 
-    RouteDownloadManager = new L.TainanBus.RenderManager();
+    DivPageVars.RouteDownloadManager = new L.Bus.RenderManager();
 
-    map = L.map('map').setView([23.1852, 120.4287], 11);
+    CommonVars.MapObject = L.map('map').setView([23.1852, 120.4287], 11);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: MapAttribution
-    }).addTo(map);
+        attribution: CommonVars.MapAttribution
+    }).addTo(CommonVars.MapObject);
 
     if(id.search(",") === -1)
-        GetRouteByCode(id , 'NoMulti');
+        GetRouteByCode(id , 'NoMulti' , CommonVars.MapObject);
     else
-        GetRouteByCode(id , 'Multi');
+        GetRouteByCode(id , 'Multi' , CommonVars.MapObject);
 }
 
-function GetRouteByCode(code , isMulti) {
+function GetRouteByCode(code , isMulti , map) {
 
-    $.getJSON(categoryJsonUrl + routeJsonExtension, function(data) {
+    $.getJSON(CommonVars.CategoryJsonUrl + CommonVars.JsonExtension , function(data) {
         $.each(data, function(i, item) {
-            RouteDownloadManager.InitStopIconOption(item.categoryIndex);
-            //Save Color Setting
-            var ColorScheme = {
-                MainLineColor: item.categoryLineColor,
-                ExtendLineColor: item.categoryLineColor2
-            }
-            ColorSchemeCollect.push(ColorScheme);
+            DivPageVars.RouteDownloadManager.InitStopIconOption(item.categoryOSMRef , item.colourScheme);
+
+            DivPageVars.ColourSchemeCollect[item.categoryOSMRef] = item.colourScheme;
+            //ColorSchemeCollect.push(item.colourScheme);
         });
 
+        var eachIdCode;
+
         if(isMulti === 'Multi')
-            var eachIdCode = code.split(",");
+            eachIdCode = code.split(",");
         else{
-            var eachIdCode = [];
+            eachIdCode = [];
             eachIdCode.push(code);
         }
 
-        $.getJSON(AllRoutesJsonUrl + routeJsonExtension, function(data) {
+        $.getJSON(DivPageVars.AllRoutesJsonUrl + CommonVars.JsonExtension , function(data) {
             //Get Data from assigned codes
             for(var j = 0 ; j < eachIdCode.length ; ++j){
                 $.each(data, function(i, item) {
@@ -72,30 +71,29 @@ function GetRouteByCode(code , isMulti) {
                             Code: item.RouteCodeName,
                             CodeNum: item.RouteCode,
                             OneWay: item.OneWayRoute !== undefined
-
                         }
 
-                        RouteElements.push(Element);
+                        DivPageVars.RouteElements.push(Element);
                         return false;
                     }
                 });
             }
 
-            if (eachIdCode.length !== RouteElements.length) {
+            if (eachIdCode.length !== DivPageVars.RouteElements.length) {
                 window.alert("編號有誤!");
             }
             else {
                 //Add Route Select Dropdown-box
-                map.addControl(new L.BusSelectRouteControl(RouteElements));
+                map.addControl(new L.BusSelectRouteControl(DivPageVars.RouteElements));
 
-                if(DirControl === undefined){
-                    DirControl = new L.BusDirControl();
-                    map.addControl(DirControl);
+                if(DivPageVars.DirControl === undefined){
+                    DivPageVars.DirControl = new L.BusDirControl();
+                    map.addControl(DivPageVars.DirControl);
                 }
 
-                if(InfoControl === undefined){
-                    InfoControl = new L.BusInfoControl();
-                    map.addControl(InfoControl);
+                if(DivPageVars.InfoControl === undefined){
+                    DivPageVars.InfoControl = new L.BusInfoControl();
+                    map.addControl(DivPageVars.InfoControl);
                 }
 
                 //Single Route should hidden the control
@@ -126,22 +124,22 @@ function SetSelectRoute() {
 
     var SelectedElementArray = SelectedElement.split(",");
 
-    currentScheme = ColorSchemeCollect[SelectedElementArray[0] - 1];
+    currentScheme = DivPageVars.ColourSchemeCollect[SelectedElementArray[0]];
 
-    RouteDownloadManager.InitLeafletOption(SelectedElementArray[0], currentScheme);
+    DivPageVars.RouteDownloadManager.InitLeafletOption(SelectedElementArray[0], currentScheme);
 
     //Refresh content of the direction control
-    if(DirControl !== undefined){
-        DirControl.RefreshRelationID(SelectedElementArray[1]);
+    if(DivPageVars.DirControl !== undefined){
+        DivPageVars.DirControl.RefreshRelationID(SelectedElementArray[1]);
 
         if(SelectedElementArray[3] === 'true')
-            DirControl.ToggleVisible(false);
+            DivPageVars.DirControl.ToggleVisible(false);
         else
-            DirControl.ToggleVisible(true);
+            DivPageVars.DirControl.ToggleVisible(true);
     }
 
-    if(InfoControl !== undefined){
-        InfoControl.RefreshRelationCode(SelectedElementArray[4]);
+    if(DivPageVars.InfoControl !== undefined){
+        DivPageVars.InfoControl.RefreshRelationCode(SelectedElementArray[4]);
     }
 
     SetSelectDir();
@@ -150,12 +148,12 @@ function SetSelectRoute() {
 function SetSelectDir() {
     var dir = $('input[name="direction"]:checked').val();
 
-    RouteDownloadManager.DownloadRouteMaster(DirControl._busRelationID, dir, DivString);
+    DivPageVars.RouteDownloadManager.DownloadRouteMaster(DivPageVars.DirControl._busRelationID, dir, DivPageVars.DivString);
 }
 
 function QueryRealtimeBus() {
       var StopCode = $("#codeID").text();
-      window.open(RealtimeBusURL + StopCode , StopCode);
+      window.open(CommonVars.ConfigObject.BusStopRealTimeUrl + StopCode , StopCode);
 }
 
 L.BusInfoControl = L.Control.extend({
@@ -182,7 +180,7 @@ L.BusInfoControl = L.Control.extend({
 
     RefreshRelationCode: function(NewCode){
         this._busRelationCode = NewCode;
-        $('#rLink').html('<a id="rLink" href="' + routeInfoUrl + this._busRelationCode + '" target="_blank">路線資訊</a>');
+        $('#rLink').html('<a id="rLink" href="' + CommonVars.ConfigObject.BusRouteInfoUrl + this._busRelationCode + '" target="_blank">路線資訊</a>');
     }
 });
 

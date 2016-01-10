@@ -5,46 +5,43 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tainan Bus Div Test</title>
+    <title>Bus Div Test</title>
 
-    <link href="build/TDivbus.min.css" rel="stylesheet" />
+    <!-- build:css:dist build/BusDiv.min.css -->
+    <link href="src/BusDiv.css" rel="stylesheet" />
+    <!-- /build -->
+
     <link href="src/DivTest.css" rel="stylesheet" />
     <link href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet" />
-    <link href="css/MarkerCluster.css" rel="stylesheet" />
-    <link href="css/MarkerCluster.Default.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css" rel="stylesheet" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
 
     <div id="map" bus-ref="0L,0R,5,Y6-1"></div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/jquery.blockUI.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70.0-2014.11.23/jquery.blockUI.min.js"></script>
 
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
-    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script> -->
-    <!-- <script src="js/bootbox.min.js"></script> -->
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="js/leaflet.markercluster.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+    <script src="lib/Leaflet.MakiMarkers.js"></script>
 
-    <!-- <script src="build/CommonVariable.min.js"></script> -->
-    <!-- <script src="build/TainanBusRender.min.js"></script> -->
-    <!-- <script src="build/TainanBusDiv.min.js"></script> -->
 
-    <script src="build/CommonVariable.min.js"></script>
+    <!-- build:js:dist build/CommonVariable.min.js -->
+    <script src="src/CommonVariable.js"></script>
+    <!-- /build -->
 
-    <script src="build/TainanBusRender.min.js"></script>
+    <!-- build:js:dist build/BusRender.min.js -->
+    <script src="src/BusRender.js"></script>
+    <!-- /build -->
 
-    <script src="build/TainanBusDiv.min.js"></script>
+    <!-- build:js:dist build/BusDivPage.min.js -->
+    <script src="src/BusDivPage.js"></script>
+    <!-- /build -->
+
 </body>
 
 </html>

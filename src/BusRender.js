@@ -1,51 +1,46 @@
-L.TainanBus = {};
+L.Bus = {};
 
-var OSMAPIUrl = "http://api.openstreetmap.org/api/0.6/relation/";
-var FullQuery = "/full";
+var BusRenderVars = {
+  OSMAPIUrl : "http://api.openstreetmap.org/api/0.6/relation/",
+  FullQuery : "/full",
+  ButtonSet : '<button type="button" class="btn btn-default btn-sm" id="quetyBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>經過路線/動態</span></button>'
+}
 
-var BusIcon = "Icons/busIcon";
-var BusIcon_Ext = ".png";
-
-var Button_Set = '<button type="button" class="btn btn-default btn-sm" id="quetyBtn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>經過路線/動態</span></button>';
-
-L.TainanBus.IconTemplate = L.Icon.extend({
-    options: {
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
-    }
-});
-
-L.TainanBus.RenderManager = L.Class.extend({
+L.Bus.RenderManager = L.Class.extend({
     initialize: function() {
         this._RouteLayers = [];
 
         this._BusMainRouteLineOptions = {};
         this._BusExtendRouteLineOptions = {};
-        this._BusIconOptions = [];
+        this._BusIconOptions = {};
 
         this._currentBusMarker = null;
     },
 
-    InitStopIconOption: function(value) {
-        var tmpIcon = new L.TainanBus.IconTemplate({
-            iconUrl: BusIcon + value + BusIcon_Ext
+    InitStopIconOption: function(name , colour) {
+        var tmpIcon = L.MakiMarkers.icon({
+            color : colour.StopColour,
+            icon: "bus",
+            size: "m"
         });
 
-        this._BusIconOptions.push(tmpIcon);
+        //console.log(tmpIcon);
+
+        this._BusIconOptions[name] = tmpIcon;
     },
 
     InitLeafletOption: function(id , scheme) {
 
-        this._currentBusMarker = this._BusIconOptions[id - 1];
+        this._currentBusMarker = this._BusIconOptions[id];
 
         this._BusMainRouteLineOptions = {
-            color: scheme.MainLineColor,
+            color: scheme.MainLineColour,
             opacity: 1,
             clickable: false
         };
 
         this._BusExtendRouteLineOptions = {
-            color: scheme.ExtendLineColor,
+            color: scheme.ExtendLineColour,
             opacity: 1,
             clickable: false
         }
@@ -65,10 +60,10 @@ L.TainanBus.RenderManager = L.Class.extend({
         var _thisClass = this;
 
         $.ajax({
-            url: OSMAPIUrl + id,
+            url: BusRenderVars.OSMAPIUrl + id,
             dataType: "xml",
             success: function(xml) {
-                var currentRouteRelation = new L.TainanBus.getRoutesInMaster(xml);
+                var currentRouteRelation = new L.Bus.getRoutesInMaster(xml);
 
                 var loop = 0; //Check Dir is null or not
 
@@ -116,13 +111,13 @@ L.TainanBus.RenderManager = L.Class.extend({
         var _thisClass = this;
 
         $.ajax({
-            url: OSMAPIUrl + id + FullQuery,
+            url: BusRenderVars.OSMAPIUrl + id + BusRenderVars.FullQuery,
             dataType: "xml",
             success: function(xml) {
-                layer = new L.TainanBus.DataLayer(xml, RouteType, _thisClass).addTo(map);
+                layer = new L.Bus.DataLayer(xml, RouteType, _thisClass).addTo(CommonVars.MapObject);
 
                 if(RouteType === "MainRoute")
-                    map.fitBounds(layer.getBounds());
+                    CommonVars.MapObject.fitBounds(layer.getBounds());
 
                 if(callFunction !== null)
                     callFunction(layer);
@@ -180,7 +175,7 @@ L.TainanBus.RenderManager = L.Class.extend({
     }
 });
 
-L.TainanBus.DataLayer = L.FeatureGroup.extend({
+L.Bus.DataLayer = L.FeatureGroup.extend({
     options: {
         //areaTags: ['area', 'building', 'leisure', 'tourism', 'ruins', 'historic', 'landuse', 'military', 'natural', 'sport'],
         uninterestingTags: ['source', 'source_ref', 'source:ref', 'history', 'attribution', 'created_by', 'tiger:county', 'tiger:tlid', 'tiger:upload_uuid'],
@@ -219,8 +214,6 @@ L.TainanBus.DataLayer = L.FeatureGroup.extend({
                 layer;
 
             if (feature.type === "node") {
-                //if (this.CheckEnableBusStop()) {
-
                     var MarkerOption = {
                         icon: RenderManager._currentBusMarker,
                         opacity: 1,
@@ -232,8 +225,7 @@ L.TainanBus.DataLayer = L.FeatureGroup.extend({
                     //layer = L.marker(feature.latLng , MarkerOption).bindPopup(this.GetBusStopName(feature.tags));
                     markers.addLayer(
                     L.marker(feature.latLng, MarkerOption).
-                    bindPopup("<h5>"+ this.GetBusStopName(feature.tags) +"</h5><br>站牌代碼：<b id='codeID'>"+ this.GetBusStopCode(feature.tags) + "</b><br>" + Button_Set));
-                //}
+                    bindPopup("<h5>"+ this.GetBusStopName(feature.tags) +"</h5><br>站牌代碼：<b id='codeID'>"+ this.GetBusStopCode(feature.tags) + "</b><br>" + BusRenderVars.Button_Set));
             } else {
                 var latLngs = new Array(feature.nodes.length);
 
@@ -259,9 +251,9 @@ L.TainanBus.DataLayer = L.FeatureGroup.extend({
 
     buildFeatures: function(xml) {
         var features = [],
-            nodes = L.TainanBus.getNodes(xml),
-            ways = L.TainanBus.getWays(xml, nodes),
-            relations = L.TainanBus.getRelations(xml, nodes, ways);
+            nodes = L.Bus.getNodes(xml),
+            ways = L.Bus.getWays(xml, nodes),
+            relations = L.Bus.getRelations(xml, nodes, ways);
 
         for (var node_id in nodes) {
             var node = nodes[node_id];
@@ -288,22 +280,8 @@ L.TainanBus.DataLayer = L.FeatureGroup.extend({
             }
         }
 
-        //window.alert(bIsBusStop);
-
         return bIsBusStop;
     },
-
-    /* CheckEnableBusStop: function() {
-
-        var checked = false;
-        var checkedElement = $("#ShowBusStop:checked");
-        var Element = $("#ShowBusStop");
-
-        if (checkedElement.length > 0 || Element.length == 0)
-            checked = true;
-
-        return checked;
-    }, */
 
     GetBusStopName: function(tags) {
         var Name = "";
@@ -334,7 +312,7 @@ L.TainanBus.DataLayer = L.FeatureGroup.extend({
     }
 });
 
-L.Util.extend(L.TainanBus, {
+L.Util.extend(L.Bus, {
 
     getNodes: function(xml) {
         var result = {};

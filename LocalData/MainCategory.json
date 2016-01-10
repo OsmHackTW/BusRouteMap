@@ -1,56 +1,83 @@
 [
 	{
-		"categoryIndex":1,
+		"categoryOSMRef":"CityBus",
 		"categoryName":"市區公車",
-		"categoryMainLineColor":"#9900CC",
-		"categoryExtendLineColor":"#D699EB"
+		"colourScheme":{
+			"MainLineColour":"#9900CC",
+			"ExtendLineColour":"#D699EB",
+			"StopColour":"#9900CC"
+		}
 	},
 	{
-		"categoryIndex":2,
+		"categoryOSMRef":"Red",
 		"categoryName":"紅幹線",
-		"categoryMainLineColor":"#FF3030",
-		"categoryExtendLineColor":"#FF6E6E"
+		"colourScheme":{
+			"MainLineColour":"#FF3030",
+			"ExtendLineColour":"#FF6E6E",
+			"StopColour":"#FF3030"
+		}
 	},
 	{
-		"categoryIndex":3,
+		"categoryOSMRef":"Blue",
 		"categoryName":"藍幹線",
-		"categoryMainLineColor":"#0000FF",
-		"categoryExtendLineColor":"#8080FF"
+		"colourScheme":{
+			"MainLineColour":"#0000FF",
+			"ExtendLineColour":"#8080FF",
+			"StopColour":"#0000FF"
+		}
 	},
 	{
-		"categoryIndex":4,
+		"categoryOSMRef":"Green",
 		"categoryName":"綠幹線",
-		"categoryMainLineColor":"#006600",
-		"categoryExtendLineColor":"#66A366"
+		"colourScheme":{
+			"MainLineColour":"#006600",
+			"ExtendLineColour":"#66A366",
+			"StopColour":"#006600"
+		}
 	},
 	{
-		"categoryIndex":5,
+		"categoryOSMRef":"Brown",
 		"categoryName":"棕幹線",
-		"categoryMainLineColor":"#993300",
-		"categoryExtendLineColor":"#C28566"
+		"colourScheme":{
+			"MainLineColour":"#993300",
+			"ExtendLineColour":"#C28566",
+			"StopColour":"#993300"
+		}
 	},
 	{
-		"categoryIndex":6,
+		"categoryOSMRef":"Orange",
 		"categoryName":"橘幹線",
-		"categoryMainLineColor":"#FF3300",
-		"categoryExtendLineColor":"#FF704D"
+		"colourScheme":{
+			"MainLineColour":"#FF3300",
+			"ExtendLineColour":"#FF704D",
+			"StopColour":"#FF3300"
+		}
 	},
 	{
-		"categoryIndex":7,
+		"categoryOSMRef":"Yellow",
 		"categoryName":"黃幹線",
-		"categoryMainLineColor":"#FFCC00",
-		"categoryExtendLineColor":"#FFE066"
+		"colourScheme":{
+			"MainLineColour":"#FFCC00",
+			"ExtendLineColour":"#FFE066",
+			"StopColour":"#FFCC00"
+		}
 	},
 	{
-		"categoryIndex":8,
+		"categoryOSMRef":"TourBus",
 		"categoryName":"觀光公車",
-		"categoryMainLineColor":"#4C4C4C",
-		"categoryExtendLineColor":"#949494"
+		"colourScheme":{
+			"MainLineColour":"#4C4C4C",
+			"ExtendLineColour":"#949494",
+			"StopColour":"#4C4C4C"
+		}
 	},
 	{
-		"categoryIndex":9,
+		"categoryOSMRef":"HSRExpress",
 		"categoryName":"高鐵快捷公車",
-		"categoryMainLineColor":"#4C4C4C",
-		"categoryExtendLineColor":"#949494"
+		"colourScheme":{
+			"MainLineColour":"#4C4C4C",
+			"ExtendLineColour":"#949494",
+			"StopColour":"#4C4C4C"
+		}
 	}
 ]

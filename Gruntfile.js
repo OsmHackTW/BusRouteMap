@@ -35,15 +35,17 @@ module.exports = function(grunt) {
               }
             },
             files: {
-              'index.html': ['devindex.html']
+              'index.html': ['devindex.html'],
+              'DivTest.html': ['devDivTest.html']
             }
           }
-        }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadTasks('tasks');
 
-    grunt.registerTask('default', ['uglify','cssmin','processhtml']);
+    grunt.registerTask('build', ['uglify','cssmin','processhtml']);
 };

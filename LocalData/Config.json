@@ -1,6 +1,7 @@
 {
   "TargetCity":"臺南市",
-  "TargetCityEng":"TainanCity",
   "TargetNetwork":"臺南市公車",
-  "CategoryJSON":"LocalData/MainCategory.json"
+  "CategoryJSON":"LocalData/MainCategory.json",
+  "BusStopRealTimeUrl":"http://www.2384.com.tw/qrcode/vstop?code=",
+  "BusRouteInfoUrl":"http://www.2384.com.tw/ebus/pathInfo.jsp?pathId="
 }

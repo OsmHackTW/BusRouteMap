@@ -20,6 +20,10 @@
     "url": "https://github.com/OsmHackTW/BusRouteMap/issues"
   },
   "homepage": "http://osmhacktw.github.io/BusRouteMap",
+  "dependencies": {
+    "async": "^1.5.1",
+    "request": "^2.67.0"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-cssmin": "^0.10.0",

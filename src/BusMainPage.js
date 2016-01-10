@@ -1,22 +1,25 @@
-//Resource Paths
-var routeJsonUrl = "LocalData/BusRoute";
-
-var currentSelectedRouteArray;
-var currentColorScheme;
-var ColorSchemeCollect = [];
-
-var RouteDownloadManager;
+var MainPageVars = {
+  RouteDownloadManager : undefined,
+  CurrentSelectedRouteArray : [],
+  CurrentColorScheme : undefined,
+  ColorSchemeCollect : {},
+  RouteJsonUrl : "LocalData/BusRoute_"
+}
 
 $(document).ready(function() {
 
-    map = L.map('map').setView([23.1852, 120.4287], 11);
+    CommonVars.InitConfig();
+
+    //console.log(CommonVars.ConfigObject);
+
+    CommonVars.MapObject = L.map('map').setView([23.1852, 120.4287], 11);
 
     $('select').selectpicker();
 
     //Render Map
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+        attribution: CommonVars.MapAttribution
+    }).addTo(CommonVars.MapObject);
 
     //ShowOptions
     InitCategories();
@@ -36,36 +39,33 @@ $(document).ready(function() {
 
     $("#Info_toggle").click(function(e) {
         e.preventDefault();
-        window.open(routeInfoUrl + currentSelectedRouteArray[1] , currentSelectedRouteArray[1]);
+        window.open(CommonVars.ConfigObject.BusRouteInfoUrl + MainPageVars.CurrentSelectedRouteArray[1] , MainPageVars.CurrentSelectedRouteArray[1]);
     });
 });
 
 //Function Section-----------------------
 function InitCategories() {
-    RouteDownloadManager = new L.TainanBus.RenderManager();
+    MainPageVars.RouteDownloadManager = new L.Bus.RenderManager();
 
-    $.getJSON(categoryJsonUrl + routeJsonExtension, function(data) {
+    $.getJSON(CommonVars.CategoryJsonUrl + CommonVars.JsonExtension , function(data) {
 
         var categoryList = $("#SelectCategory").empty();
 
         $.each(data, function(i, item) {
-            //window.alert(item.categoryName);
-            categoryList.append($('<option></option>').text(item.categoryName).attr('value', item.categoryIndex));
+            //console.log(item.categoryOSMRef);
+            categoryList.append($('<option></option>').text(item.categoryName).attr('value', item.categoryOSMRef));
 
             //window.alert(RouteColorSettings["LineColor"]);
-            RouteDownloadManager.InitStopIconOption(item.categoryIndex);
+            MainPageVars.RouteDownloadManager.InitStopIconOption(item.categoryOSMRef , item.colourScheme);
+
             //Save Color Setting
-            var ColorScheme = {
-                MainLineColor: item.categoryMainLineColor,
-                ExtendLineColor: item.categoryExtendLineColor
-            }
-            ColorSchemeCollect.push(ColorScheme);
+            MainPageVars.ColorSchemeCollect[item.categoryOSMRef] = item.colourScheme;
         });
 
         $('#SelectCategory').selectpicker('refresh');
 
         //Init Default Route List
-        SetRoutesList(1);
+        SetRoutesList("CityBus");
     });
 }
 
@@ -77,17 +77,17 @@ function ChangeCategory() {
     }
 }
 
-function SetRoutesList(id) {
+function SetRoutesList(category) {
     var routeList = $("#SelectRoute").empty();
 
-    currentColorScheme = ColorSchemeCollect[id - 1];
+    MainPageVars.CurrentColorScheme = MainPageVars.ColorSchemeCollect[category];
 
     //console.log(currentLineColor);
 
     //Change Color
-    RouteDownloadManager.InitLeafletOption(id, currentColorScheme);
+    MainPageVars.RouteDownloadManager.InitLeafletOption(category, MainPageVars.CurrentColorScheme);
 
-    $.getJSON(routeJsonUrl + id + routeJsonExtension, function(data) {
+    $.getJSON(MainPageVars.RouteJsonUrl + category + CommonVars.JsonExtension , function(data) {
         $.each(data, function(i, item) {
             routeList.append($('<option></option>').text(item.RouteName).attr('value', item.RouteOSMRelation + ',' + item.RouteCode).attr('label', item.RouteFromTo));
         });
@@ -106,7 +106,7 @@ function SetSelectedRoute() {
 
     var currentSelectedRoute = $("#SelectRoute option:selected").attr('value');
 
-    currentSelectedRouteArray = currentSelectedRoute.split(",");
+    MainPageVars.CurrentSelectedRouteArray = currentSelectedRoute.split(",");
 
     if (SelectedRoute !== undefined && description !== undefined) {
         description.text(SelectedRoute);
@@ -118,10 +118,10 @@ function SetSelectedRoute() {
 function SetSelectDirection() {
     var dir = $('input[name="dirctions"]:checked').val();
 
-    RouteDownloadManager.DownloadRouteMaster(currentSelectedRouteArray[0], dir, null);
+    MainPageVars.RouteDownloadManager.DownloadRouteMaster(MainPageVars.CurrentSelectedRouteArray[0], dir, null);
 }
 
 function QueryRealtimeBus() {
       var StopCode = $("#codeID").text();
-      window.open(RealtimeBusURL + StopCode , StopCode);
+      window.open(CommonVars.ConfigObject.BusStopRealTimeUrl + StopCode , StopCode);
 }
