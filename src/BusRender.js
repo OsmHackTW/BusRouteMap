@@ -225,7 +225,7 @@ L.Bus.DataLayer = L.FeatureGroup.extend({
                     //layer = L.marker(feature.latLng , MarkerOption).bindPopup(this.GetBusStopName(feature.tags));
                     markers.addLayer(
                     L.marker(feature.latLng, MarkerOption).
-                    bindPopup("<h5>"+ this.GetBusStopName(feature.tags) +"</h5><br>站牌代碼：<b id='codeID'>"+ this.GetBusStopCode(feature.tags) + "</b><br>" + BusRenderVars.Button_Set));
+                    bindPopup("<h5>"+ this.GetBusStopName(feature.tags) +"</h5><br>站牌代碼：<b id='codeID'>"+ this.GetBusStopCode(feature.tags) + "</b><br>" + BusRenderVars.ButtonSet));
             } else {
                 var latLngs = new Array(feature.nodes.length);
 
