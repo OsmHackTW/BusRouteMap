@@ -61,14 +61,13 @@ function GetRouteByCode(code , isMulti , map) {
             //Get Data from assigned codes
             for(var j = 0 ; j < eachIdCode.length ; ++j){
                 $.each(data, function(i, item) {
-                    if (eachIdCode[j] == item.RouteCodeName) {
+                    if (eachIdCode[j] == item.RouteRef) {
 
                         //console.log(item.RouteOSMRelation);
                         var Element = {
                             Category: item.RouteCategory,
                             RelationID: item.RouteOSMRelation,
                             Name: item.RouteName,
-                            Code: item.RouteCodeName,
                             CodeNum: item.RouteCode,
                             OneWay: item.OneWayRoute !== undefined
                         }
@@ -132,14 +131,14 @@ function SetSelectRoute() {
     if(DivPageVars.DirControl !== undefined){
         DivPageVars.DirControl.RefreshRelationID(SelectedElementArray[1]);
 
-        if(SelectedElementArray[3] === 'true')
+        if(SelectedElementArray[2] === 'true')
             DivPageVars.DirControl.ToggleVisible(false);
         else
             DivPageVars.DirControl.ToggleVisible(true);
     }
 
     if(DivPageVars.InfoControl !== undefined){
-        DivPageVars.InfoControl.RefreshRelationCode(SelectedElementArray[4]);
+        DivPageVars.InfoControl.RefreshRelationCode(SelectedElementArray[3]);
     }
 
     SetSelectDir();
@@ -244,7 +243,9 @@ L.BusSelectRouteControl = L.Control.extend({
         var options = "";
 
         for(var i = 0 ; i < this._RouteElements.length ; i++){
-            var optionE = '<option label="'+ this._RouteElements[i].Name +'" value="'+ this._RouteElements[i].Category + ',' + this._RouteElements[i].RelationID + ',' + this._RouteElements[i].Code + ',' + this._RouteElements[i].OneWay + ',' + this._RouteElements[i].CodeNum + '">'+ this._RouteElements[i].Name +'</option>';
+            var optionE = '<option label="'+ this._RouteElements[i].Name +'" value="'+ this._RouteElements[i].Category + ','
+            + this._RouteElements[i].RelationID + ',' + this._RouteElements[i].OneWay +
+             ',' + this._RouteElements[i].CodeNum + '">'+ this._RouteElements[i].Name +'</option>';
 
             //console.log(optionE);
 
