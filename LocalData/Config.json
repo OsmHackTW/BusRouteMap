@@ -3,5 +3,11 @@
   "TargetNetwork":"臺南市公車",
   "CategoryJSON":"LocalData/MainCategory.json",
   "BusStopRealTimeUrl":"http://www.2384.com.tw/qrcode/vstop?code=",
-  "BusRouteInfoUrl":"http://www.2384.com.tw/ebus/pathInfo.jsp?pathId="
+  "BusRouteInfoUrl":"http://www.2384.com.tw/ebus/pathInfo.jsp?pathId=",
+  "Localization":{
+    "Title":"公車路線地圖",
+    "Forward":"往",
+    "Backward":"返",
+    "Info":"路線資訊"
+  }
 }

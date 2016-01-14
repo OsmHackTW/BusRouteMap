@@ -74,24 +74,26 @@ L.Bus.RenderManager = L.Class.extend({
                         _thisClass.RenderRoute(currentRouteRelation[i].Ref, currentRouteRelation[i].Extend , function(layer){
                             _thisClass._RouteLayers.push(layer);
                         });
-
                         loop++;
                     }
                 };
 
-                if (loop == 0) {
-
+                if (loop === 0){
                     if(typeof(bootbox) === 'undefined')
                         window.alert("此路線為單向行駛!");
                     else
                         bootbox.alert("此路線為單向行駛!");
+
+                    _thisClass.BlockingMask({enable:false},targetDiv);
+
+                    return;
                 }
 
                 $(".leaflet-popup-pane").on("click","#quetyBtn",QueryRealtimeBus);
 
                 window.setTimeout(function(){
                     _thisClass.BlockingMask({enable:false},targetDiv);
-                },2000);
+                }, (loop * 500) + 500);
             },
             error: function() {
                 if(typeof(bootbox) === 'undefined')
@@ -208,6 +210,8 @@ L.Bus.DataLayer = L.FeatureGroup.extend({
         if (!(features instanceof Array)) {
             features = this.buildFeatures(features);
         }
+
+        //console.log(features);
 
         for (var i = 0; i < features.length; i++) {
             var feature = features[i],

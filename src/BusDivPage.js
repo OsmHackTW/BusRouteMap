@@ -10,16 +10,17 @@ var DivPageVars = {
 
 $(document).ready(function() {
 
-    CommonVars.InitConfig();
+    CommonVars.InitConfig(function(config){
+        var DivElement = $(DivPageVars.DivString);
 
-    var DivElement = $(DivPageVars.DivString);
-
-    if (DivElement === undefined || DivElement.attr('bus-ref') === undefined) {
-        window.alert("找不到地圖Div或編號不存在!");
-        return;
-    } else {
-        CreateBusMap(DivElement.attr('bus-ref'));
-    }
+        if (DivElement === undefined || DivElement.attr('bus-ref') === undefined) {
+            window.alert("找不到地圖Div或編號不存在!");
+            return;
+        }
+        else {
+            CreateBusMap(DivElement.attr('bus-ref'));
+        }
+    });
 });
 
 function CreateBusMap(id) {
@@ -168,7 +169,7 @@ L.BusInfoControl = L.Control.extend({
 
     onAdd: function(map){
         var OptionContainer = L.DomUtil.create('div', 'info');
-        $(OptionContainer).html('<a id="rLink" href="#">路線資訊</a>');
+        $(OptionContainer).html('<a id="rLink" href="#">'+ CommonVars.ConfigObject.Localization["Info"] +'</a>');
 
         return OptionContainer;
     },
@@ -179,7 +180,7 @@ L.BusInfoControl = L.Control.extend({
 
     RefreshRelationCode: function(NewCode){
         this._busRelationCode = NewCode;
-        $('#rLink').html('<a id="rLink" href="' + CommonVars.ConfigObject.BusRouteInfoUrl + this._busRelationCode + '" target="_blank">路線資訊</a>');
+        $('#rLink').html('<a id="rLink" href="' + CommonVars.ConfigObject.BusRouteInfoUrl + this._busRelationCode + '" target="_blank">'+ CommonVars.ConfigObject.Localization["Info"] +'</a>');
     }
 });
 
@@ -195,8 +196,8 @@ L.BusDirControl = L.Control.extend({
     },
 
     onAdd: function(map) {
-        var ForwardOption = '<input type="radio" name="direction" value="forward" checked>往程<br/>';
-        var BackwardOption = '<input type="radio" name="direction" value="backward">返程';
+        var ForwardOption = '<input type="radio" name="direction" value="forward" checked>'+ CommonVars.ConfigObject.Localization["Forward"] +'<br/>';
+        var BackwardOption = '<input type="radio" name="direction" value="backward">'+ CommonVars.ConfigObject.Localization["Backward"] +'';
 
         var OptionContainer = L.DomUtil.create('div', 'dir');
         $(OptionContainer).append(ForwardOption, BackwardOption);

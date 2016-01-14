@@ -8,7 +8,9 @@ var MainPageVars = {
 
 $(document).ready(function() {
 
-    CommonVars.InitConfig();
+    CommonVars.InitConfig(function(_config){
+        SetupL10nString(_config);
+    });
 
     //console.log(CommonVars.ConfigObject);
 
@@ -42,6 +44,14 @@ $(document).ready(function() {
         window.open(CommonVars.ConfigObject.BusRouteInfoUrl + MainPageVars.CurrentSelectedRouteArray[1] , MainPageVars.CurrentSelectedRouteArray[1]);
     });
 });
+
+function SetupL10nString (cObj){
+  $(".navbar-brand").append(cObj.TargetCity + cObj.Localization["Title"]);
+  $("title").append(cObj.TargetCity + cObj.Localization["Title"]);
+  $("#navInfo").append(cObj.Localization["Info"] + ":");
+  $("#RForward").append(cObj.Localization["Forward"]);
+  $("#RBackward").append(cObj.Localization["Backward"]);
+}
 
 //Function Section-----------------------
 function InitCategories() {
@@ -99,20 +109,22 @@ function SetRoutesList(category) {
 }
 
 function SetSelectedRoute() {
-    var description = $("#RouteDes").empty();
-    var SelectedRoute;
+    //var description = $("#RouteDes").empty();
+    /* var SelectedRoute;
     //window.alert($("#SelectRoute option:selected").attr('label'));
-    SelectedRoute = $("#SelectRoute option:selected").attr('label');
+    SelectedRoute = $("#SelectRoute option:selected").attr('label'); */
 
     var currentSelectedRoute = $("#SelectRoute option:selected").attr('value');
 
     MainPageVars.CurrentSelectedRouteArray = currentSelectedRoute.split(",");
 
-    if (SelectedRoute !== undefined && description !== undefined) {
-        description.text(SelectedRoute);
+    SetSelectDirection();
+
+    /* if (SelectedRoute !== undefined   && description !== undefined ) {
+        //description.text(SelectedRoute);
         //window.alert(SelectedRouteID);
         SetSelectDirection();
-    }
+    } */
 }
 
 function SetSelectDirection() {

@@ -15,9 +15,12 @@ Build Bus Routes Map for your city !
 * Change direction of route
 * Query dynamic arrival time at the stop
 * Query information of current route
-* Dive Page for integration
+* Div integration
 
 # Build Your Own Bus Map !
+## Prepare your Data in OSM
+# [OSM Bus Schema](https://github.com/osmhacktw/BusRouteMap/wiki/OSM-Bus-Schema)
+
 ## Tutorial
 * [Quick Start](https://github.com/osmhacktw/BusRouteMap/wiki/Quick-Start)
 * [Setup config and category files](https://github.com/osmhacktw/BusRouteMap/wiki/Setup-config-and-category-files)
@@ -35,7 +38,3 @@ Build Bus Routes Map for your city !
 * [BootBox](http://bootboxjs.com/)
 * [Bootstrap-Select](http://silviomoreto.github.io/bootstrap-select/)
 * [jQuery-BlockUI](http://malsup.com/jquery/block/)
-
-# Data Reference:
-
-* OpenStreetMap

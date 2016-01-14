@@ -64,15 +64,15 @@ module.exports = function(grunt){
 									if(Rvalue.tags["ref:category"] == Cvalue.categoryOSMRef){
 
 										//skip render via if the tag doesn't exist.
-										var _FromTo;
-										if(Rvalue.tags["via"] === undefined)
+										/* var _FromTo;
+										 if(Rvalue.tags["via"] === undefined)
 											_FromTo = Rvalue.tags["from"] + "-" + Rvalue.tags["to"];
 										else
-											_FromTo = Rvalue.tags["from"] + "-" + Rvalue.tags["via"] + "-" + Rvalue.tags["to"];
+											_FromTo = Rvalue.tags["from"] + "-" + Rvalue.tags["via"] + "-" + Rvalue.tags["to"]; */
 
 										var _categoriedRoute = {
 											RouteName: Rvalue.tags["name"],
-											RouteFromTo: _FromTo,
+											//RouteFromTo: _FromTo,
 											RouteOSMRelation: Rvalue.id,
 											RouteCode: Rvalue.tags["ref:querycode"]
 										}

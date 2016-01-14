@@ -5,12 +5,10 @@ var CommonVars = {
   MapAttribution : '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
   ConfigObject : undefined,
   MapObject : undefined,
-  InitConfig : function(doSome) {
+  InitConfig : function(doSomeThings) {
       $.getJSON(CommonVars.ConfigJsonUrl + CommonVars.JsonExtension , function(data) {
           CommonVars.ConfigObject = data;
-          
-          $(".navbar-brand").prepend(data.TargetCity);
-          $("title").prepend(data.TargetCity);
+          doSomeThings(data);
       });
   }
 }
