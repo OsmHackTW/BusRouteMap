@@ -2,13 +2,16 @@
 
 var request = require('request');
 var async = require('async');
-var util = require('util');
+//var util = require('util');
 
 module.exports = function(grunt){
-	grunt.registerTask('fetch-category', function(){
+	grunt.registerTask('fetch-category', function(chooseServer){
 
 			//Open grunt async
 			var done = this.async();
+
+			var _FrenchServer = "https://overpass-api.de/api/interpreter?data=";
+			var _TaiwanServer = "https://overpass.nchc.org.tw/api/interpreter?data=";
 
 			var _config;
       var _query1 = '[out:json];relation["network"="';
@@ -22,15 +25,29 @@ module.exports = function(grunt){
 				//Load category json
 				var cJson = grunt.file.readJSON(_config.CategoryJSON);
 
-				if(cJson !== undefined)
+				if(cJson !== undefined){
 					callback(null, cJson);
-				else
+				}
+				else{
 					callback("IOException", null);
-			}
+				}
+			};
 
 			var DownloadRouteXML = function(callback){
 				grunt.log.writeln('Downloading Route Data...');
-	      request('https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(_query1 + _config.TargetNetwork +_query2) , function(error, response , body){
+
+				var _FinalServer;
+
+				if(chooseServer === 'Taiwan')
+				{
+					_FinalServer = _TaiwanServer;
+				}
+				else if(chooseServer === 'French')
+				{
+					_FinalServer = _FrenchServer;
+				}
+
+	      request(_FinalServer + encodeURIComponent(_query1 + _config.TargetNetwork +_query2) , function(error, response , body){
 	          if (error){
 							grunt.log.writeln('OverPass Error :' + error.message);
 							callback(error, null);
@@ -40,7 +57,7 @@ module.exports = function(grunt){
 						}
 
 	      });
-			}
+			};
 
 			//Do two things , download json after load category;
 			async.series([LoadCategoryJSON , DownloadRouteXML],
@@ -61,7 +78,7 @@ module.exports = function(grunt){
 								var _output = [];
 
 								_allRoutes.elements.map(function(Rvalue, index){
-									if(Rvalue.tags["ref:category"] == Cvalue.categoryOSMRef){
+									if(Rvalue.tags["ref:category"] === Cvalue.categoryOSMRef){
 
 										//skip render via if the tag doesn't exist.
 										/* var _FromTo;
@@ -71,11 +88,11 @@ module.exports = function(grunt){
 											_FromTo = Rvalue.tags["from"] + "-" + Rvalue.tags["via"] + "-" + Rvalue.tags["to"]; */
 
 										var _categoriedRoute = {
-											RouteName: Rvalue.tags["name"],
+											RouteName: Rvalue.tags.name,
 											//RouteFromTo: _FromTo,
 											RouteOSMRelation: Rvalue.id,
 											RouteCode: Rvalue.tags["ref:querycode"]
-										}
+										};
 
 										_output.push(_categoriedRoute);
 									}
@@ -85,8 +102,9 @@ module.exports = function(grunt){
 								grunt.file.write("LocalData/BusRoute_" + Cvalue.categoryOSMRef + ".json", _outputString);
 
 								//Check write file successfully
-								if(grunt.file.exists("LocalData/BusRoute_" + Cvalue.categoryOSMRef + ".json"))
+								if(grunt.file.exists("LocalData/BusRoute_" + Cvalue.categoryOSMRef + ".json")){
 									grunt.log.writeln("LocalData/BusRoute_" + Cvalue.categoryOSMRef + ".json has been generated.");
+								}
 
 								_output = [];
 						});

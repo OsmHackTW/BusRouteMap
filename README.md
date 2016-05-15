@@ -1,4 +1,4 @@
-BusRouteMap
+Bus Route Map
 ============
 
 
@@ -15,16 +15,16 @@ Build Bus Routes Map for your city !
 * Change direction of route
 * Query dynamic arrival time at the stop
 * Query information of current route
-* Div integration
+* Integration style bus map
 
 # Build Your Own Bus Map !
 ## Prepare your Data in OSM
-# [OSM Bus Schema](https://github.com/osmhacktw/BusRouteMap/wiki/OSM-Bus-Schema)
+* [OSM Bus Schema](https://github.com/osmhacktw/BusRouteMap/wiki/OSM-Bus-Schema)
 
 ## Tutorial
 * [Quick Start](https://github.com/osmhacktw/BusRouteMap/wiki/Quick-Start)
-* [Setup config and category files](https://github.com/osmhacktw/BusRouteMap/wiki/Setup-config-and-category-files)
-* [Build bus list Json files](https://github.com/osmhacktw/BusRouteMap/wiki/Build-bus-list-Json-files)
+* [Setup configure file and category files](https://github.com/osmhacktw/BusRouteMap/wiki/Setup-config-and-category-files)
+* [Build json files of route list](https://github.com/osmhacktw/BusRouteMap/wiki/Build-bus-list-Json-files)
 
 ## Extra
 * [How to use integrated map](https://github.com/osmhacktw/BusRouteMap/wiki/How-to-use-integrated-bus-map)
